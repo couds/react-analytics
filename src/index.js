@@ -9,7 +9,7 @@ export const AnalyticsContext = React.createContext({
 });
 
 // eslint-disable-next-line react/prop-types
-const ReactAnalytics = ({ gtag, fullstory, hotjar, segment, children }) => {
+const ReactAnalytics = ({ gtm, fullstory, hotjar, segment, children }) => {
   const [eventTrackers, setEventTrackers] = useState([]);
 
   const addTracker = (id, tracker) => {
@@ -25,7 +25,7 @@ const ReactAnalytics = ({ gtag, fullstory, hotjar, segment, children }) => {
     });
   };
 
-  useGoogleTagManager(gtag, addTracker);
+  useGoogleTagManager(gtm, addTracker);
   useSegment(segment, addTracker);
 
   useFullstory(fullstory);
