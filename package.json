@@ -4,7 +4,8 @@
   "description": "A utility that centralize several analytics systems",
   "main": "lib/index.js",
   "scripts": {
-    "build": "babel ./src --out-dir ./lib --copy-files --source-maps"
+    "build": "babel ./src --out-dir ./lib --copy-files --source-maps",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
