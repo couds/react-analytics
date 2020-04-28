@@ -1,0 +1,7 @@
+.coverage
+node_modules
+.babelrc
+.eslint*
+.git*
+README.md
+.npmignore
