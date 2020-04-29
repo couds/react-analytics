@@ -40,13 +40,25 @@ import React, { useEffect, useContext } from 'react';
 import { AnalyticsContext } from 'views/components/analytics';
 
 const MyInnerView = () => {
-  const { trackEvent } = useContext(AnalyticsContext);
+  const { trackEvent, identify, trackPage } = useContext(AnalyticsContext);
   useEffect(() => {
-    trackEvent('my-event', {
-      customVar1: 'test',
-      customVar2: 2,
+    // Track this page
+    trackPage();
+
+    // Identify user on analytids that allow indentifying
+    identify('user-id', {
+      name: 'test',
+      otherprop: 2,
     });
   }, []);
+
+  const onClick = () => {
+    // You can send custom events this way
+    trackEvent('my-custom-event', {
+      prop1: 'custom value',
+    });
+  };
+
   return (
     ...
   );
@@ -54,3 +66,9 @@ const MyInnerView = () => {
 
 ```
 
+
+## NOTES:
+
+- For Google Tag Manager we can't send the native **PageView** event `gtm.js`, because it send a event `undefined`, We send a custom event named `pageView`.
+
+To setup the tracking when the user navigate you should create a new trigger of tyoe `Custom Event` wieh the event name `pageView`

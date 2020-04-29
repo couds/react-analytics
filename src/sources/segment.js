@@ -49,8 +49,24 @@ const useSegment = (segment, addTracker) => {
     }
     window.analytics.SNIPPET_VERSION = '4.1.0';
     window.analytics.page();
-    addTracker('segment', (event, props) => {
+
+    const eventTracker = (event, props) => {
       window.analytics.track(event, props);
+    };
+
+    const identify = (userId, props) => {
+      window.analytics.identify(userId, props);
+    };
+
+    const trackPage = (props = {}) => {
+      const { name, ...properties } = props;
+      window.analytics.page(name, properties);
+    };
+
+    addTracker('segment', {
+      eventTracker,
+      identify,
+      trackPage,
     });
 
     return () => {

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const useFullstory = (fullstory) => {
+const useFullstory = (fullstory, addTracker) => {
   useEffect(() => {
     if (!fullstory) {
       return;
@@ -63,6 +63,12 @@ const useFullstory = (fullstory) => {
     window.FS._w = {};
     window.FS._w.XMLHttpRequest = window.XMLHttpRequest;
     window.FS._w.fetch = window.fetch;
+
+    addTracker('fullstory', {
+      identify: (userId, props) => {
+        window.FS.identify(userId, props);
+      },
+    });
 
     if (window.fetch)
       window.fetch = function fetch(...args) {

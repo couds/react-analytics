@@ -7,16 +7,27 @@ const useGoogleTagManager = (gtag, addTracker) => {
     }
     window.dataLayer = window.dataLayer || [];
 
-    const track = (event, props) => {
+    const eventTracker = (event, props) => {
       window.dataLayer.push({
-        event,
         ...props,
+        event,
       });
     };
 
-    addTracker('google', track);
+    const trackPage = (props) => {
+      eventTracker('pageView', props);
+    };
 
-    track('gtm.js', { 'gtm.start': new Date().getTime() });
+    addTracker('google', {
+      eventTracker,
+      trackPage,
+    });
+
+    eventTracker('gtm.js', {
+      'gtm.start': new Date().getTime(),
+    });
+
+    trackPage();
 
     const gtagScript = document.createElement('script');
     if (!document.querySelector('script#gtag-script')) {

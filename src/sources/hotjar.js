@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const useHotjar = (hotjar) => {
+const useHotjar = (hotjar, addTracker) => {
   useEffect(() => {
     if (!hotjar) {
       return;
@@ -14,6 +14,12 @@ const useHotjar = (hotjar) => {
     script.async = 1;
     script.src = `https://static.hotjar.com/c/hotjar-${hotjar}.js?sv=6`;
     head.appendChild(script);
+
+    addTracker('hotjar', {
+      identify: (userId, props) => {
+        window.hj('identify', userId, props);
+      },
+    });
   }, [hotjar]);
 };
 
