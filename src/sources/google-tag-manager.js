@@ -7,12 +7,16 @@ const useGoogleTagManager = (gtag, addTracker) => {
     }
     window.dataLayer = window.dataLayer || [];
 
-    addTracker('google', (event, props) => {
+    const track = (event, props) => {
       window.dataLayer.push({
         event,
         ...props,
       });
-    });
+    };
+
+    addTracker('google', track);
+
+    track('gtm.js', { 'gtm.start': new Date().getTime() });
 
     const gtagScript = document.createElement('script');
     if (!document.querySelector('script#gtag-script')) {
