@@ -1,6 +1,6 @@
 {
   "name": "@couds/react-analytics",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A utility that centralize several analytics systems",
   "main": "lib/index.js",
   "scripts": {
