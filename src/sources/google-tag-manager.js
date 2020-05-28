@@ -7,7 +7,7 @@ const useGoogleTagManager = (gtag, addTracker) => {
     }
     window.dataLayer = window.dataLayer || [];
 
-    const eventTracker = (event, props) => {
+    const trackEvent = (event, props) => {
       window.dataLayer.push({
         ...props,
         event,
@@ -15,15 +15,15 @@ const useGoogleTagManager = (gtag, addTracker) => {
     };
 
     const trackPage = (props) => {
-      eventTracker('pageView', props);
+      trackEvent('pageView', props);
     };
 
     addTracker('google', {
-      eventTracker,
+      trackEvent,
       trackPage,
     });
 
-    eventTracker('gtm.js', {
+    trackEvent('gtm.js', {
       'gtm.start': new Date().getTime(),
     });
 

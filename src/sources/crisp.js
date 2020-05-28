@@ -18,7 +18,7 @@ const useCrisp = (crips, addTracker) => {
           window.$crisp.push(['set', 'user:email', props.email]);
         }
       },
-      eventTracker: (event, props = {}) => {
+      trackEvent: (event, props = {}) => {
         window.$crisp.push(['set', 'session:event', [[[event, props]]]]);
       },
     });

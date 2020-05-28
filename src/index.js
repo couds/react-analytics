@@ -14,15 +14,15 @@ export const AnalyticsContext = React.createContext({
 });
 
 const ReactAnalytics = ({ gtm, fullstory, hotjar, segment, heyFlow, crisp, children }) => {
-  const [eventTrackers, setEventTrackers] = useState([]);
+  const [trackers, setTrackers] = useState([]);
 
-  const addTracker = (id, { eventTracker, identify, trackPage }) => {
-    setEventTrackers((trackers) => {
-      return trackers
+  const addTracker = (id, { trackEvent, identify, trackPage }) => {
+    setTrackers((trs) => {
+      return trs
         .filter((t) => {
           return t.id !== id;
         })
-        .concat([{ id, eventTracker, identify, trackPage }]);
+        .concat([{ id, trackEvent, identify, trackPage }]);
     });
   };
 
@@ -36,7 +36,7 @@ const ReactAnalytics = ({ gtm, fullstory, hotjar, segment, heyFlow, crisp, child
 
   const trackFactory = (type) => {
     return (event, args) => {
-      eventTrackers
+      trackers
         .filter((t) => {
           return t[type];
         })
